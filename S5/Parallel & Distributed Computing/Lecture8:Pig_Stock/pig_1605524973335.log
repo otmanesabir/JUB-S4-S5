@@ -1,0 +1,86 @@
+Pig Stack Trace
+---------------
+ERROR 6007: Unable to check name hdfs://localhost:9000/user/jovyan
+
+org.apache.pig.impl.logicalLayer.FrontendException: ERROR 1000: Error during parsing. Unable to check name hdfs://localhost:9000/user/jovyan
+	at org.apache.pig.PigServer$Graph.parseQuery(PigServer.java:1833)
+	at org.apache.pig.PigServer$Graph.access$000(PigServer.java:1528)
+	at org.apache.pig.PigServer.parseAndBuild(PigServer.java:461)
+	at org.apache.pig.PigServer.executeBatch(PigServer.java:486)
+	at org.apache.pig.PigServer.executeBatch(PigServer.java:472)
+	at org.apache.pig.tools.grunt.GruntParser.executeBatch(GruntParser.java:171)
+	at org.apache.pig.tools.grunt.GruntParser.parseStopOnError(GruntParser.java:234)
+	at org.apache.pig.tools.grunt.GruntParser.parseStopOnError(GruntParser.java:205)
+	at org.apache.pig.tools.grunt.Grunt.exec(Grunt.java:81)
+	at org.apache.pig.Main.run(Main.java:630)
+	at org.apache.pig.Main.main(Main.java:175)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.apache.hadoop.util.RunJar.run(RunJar.java:323)
+	at org.apache.hadoop.util.RunJar.main(RunJar.java:236)
+Caused by: Failed to parse: Pig script failed to parse: <file average_maximum_daily_temperatures.pig, line 2, column 10> pig script failed to validate: org.apache.pig.backend.datastorage.DataStorageException: ERROR 6007: Unable to check name hdfs://localhost:9000/user/jovyan
+	at org.apache.pig.parser.QueryParserDriver.parse(QueryParserDriver.java:199)
+	at org.apache.pig.PigServer$Graph.parseQuery(PigServer.java:1820)
+	... 16 more
+Caused by: <file average_maximum_daily_temperatures.pig, line 2, column 10> pig script failed to validate: org.apache.pig.backend.datastorage.DataStorageException: ERROR 6007: Unable to check name hdfs://localhost:9000/user/jovyan
+	at org.apache.pig.parser.LogicalPlanBuilder.buildLoadOp(LogicalPlanBuilder.java:904)
+	at org.apache.pig.parser.LogicalPlanGenerator.load_clause(LogicalPlanGenerator.java:3568)
+	at org.apache.pig.parser.LogicalPlanGenerator.op_clause(LogicalPlanGenerator.java:1625)
+	at org.apache.pig.parser.LogicalPlanGenerator.general_statement(LogicalPlanGenerator.java:1102)
+	at org.apache.pig.parser.LogicalPlanGenerator.statement(LogicalPlanGenerator.java:560)
+	at org.apache.pig.parser.LogicalPlanGenerator.query(LogicalPlanGenerator.java:421)
+	at org.apache.pig.parser.QueryParserDriver.parse(QueryParserDriver.java:191)
+	... 17 more
+Caused by: org.apache.pig.backend.datastorage.DataStorageException: ERROR 6007: Unable to check name hdfs://localhost:9000/user/jovyan
+	at org.apache.pig.backend.hadoop.datastorage.HDataStorage.isContainer(HDataStorage.java:223)
+	at org.apache.pig.backend.hadoop.datastorage.HDataStorage.asElement(HDataStorage.java:132)
+	at org.apache.pig.backend.hadoop.datastorage.HDataStorage.asElement(HDataStorage.java:143)
+	at org.apache.pig.parser.QueryParserUtils.getCurrentDir(QueryParserUtils.java:93)
+	at org.apache.pig.parser.LogicalPlanBuilder.buildLoadOp(LogicalPlanBuilder.java:896)
+	... 23 more
+Caused by: java.net.ConnectException: Call From p-fb00a143-bee8-437f-b51a-dc92d20f1763/172.2.135.35 to localhost:9000 failed on connection exception: java.net.ConnectException: Connection refused; For more details see:  http://wiki.apache.org/hadoop/ConnectionRefused
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:490)
+	at org.apache.hadoop.net.NetUtils.wrapWithMessage(NetUtils.java:837)
+	at org.apache.hadoop.net.NetUtils.wrapException(NetUtils.java:757)
+	at org.apache.hadoop.ipc.Client.getRpcResponse(Client.java:1566)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1508)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1405)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine2$Invoker.invoke(ProtobufRpcEngine2.java:234)
+	at org.apache.hadoop.ipc.ProtobufRpcEngine2$Invoker.invoke(ProtobufRpcEngine2.java:119)
+	at com.sun.proxy.$Proxy12.getFileInfo(Unknown Source)
+	at org.apache.hadoop.hdfs.protocolPB.ClientNamenodeProtocolTranslatorPB.getFileInfo(ClientNamenodeProtocolTranslatorPB.java:964)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invokeMethod(RetryInvocationHandler.java:422)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeMethod(RetryInvocationHandler.java:165)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invoke(RetryInvocationHandler.java:157)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler$Call.invokeOnce(RetryInvocationHandler.java:95)
+	at org.apache.hadoop.io.retry.RetryInvocationHandler.invoke(RetryInvocationHandler.java:359)
+	at com.sun.proxy.$Proxy13.getFileInfo(Unknown Source)
+	at org.apache.hadoop.hdfs.DFSClient.getFileInfo(DFSClient.java:1731)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$29.doCall(DistributedFileSystem.java:1725)
+	at org.apache.hadoop.hdfs.DistributedFileSystem$29.doCall(DistributedFileSystem.java:1722)
+	at org.apache.hadoop.fs.FileSystemLinkResolver.resolve(FileSystemLinkResolver.java:81)
+	at org.apache.hadoop.hdfs.DistributedFileSystem.getFileStatus(DistributedFileSystem.java:1737)
+	at org.apache.hadoop.fs.FileSystem.exists(FileSystem.java:1729)
+	at org.apache.pig.backend.hadoop.datastorage.HDataStorage.isContainer(HDataStorage.java:216)
+	... 27 more
+Caused by: java.net.ConnectException: Connection refused
+	at java.base/sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at java.base/sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:779)
+	at org.apache.hadoop.net.SocketIOWithTimeout.connect(SocketIOWithTimeout.java:206)
+	at org.apache.hadoop.net.NetUtils.connect(NetUtils.java:533)
+	at org.apache.hadoop.ipc.Client$Connection.setupConnection(Client.java:699)
+	at org.apache.hadoop.ipc.Client$Connection.setupIOstreams(Client.java:812)
+	at org.apache.hadoop.ipc.Client$Connection.access$3800(Client.java:413)
+	at org.apache.hadoop.ipc.Client.getConnection(Client.java:1636)
+	at org.apache.hadoop.ipc.Client.call(Client.java:1452)
+	... 49 more
+================================================================================

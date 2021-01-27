@@ -1,0 +1,3 @@
+instructor teaches hadoop
+students learn hadoop
+students learn HDFS in class
